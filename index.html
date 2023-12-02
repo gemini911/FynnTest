@@ -64,6 +64,18 @@
         resultContainer.innerHTML = "查询结果：<pre>" + JSON.stringify(data, null, 2) + "</pre>";
       }
     }
+
+
+
+    function jsonpCallback(data) {
+  // 处理返回的数据
+  console.log(data);
+}
+
+var script = document.createElement('script');
+script.src = 'https://whois.freeaiapi.xyz/?name=teng.com&suffix=com&callback=jsonpCallback';
+document.body.appendChild(script);
+
   </script>
 
 </body>
