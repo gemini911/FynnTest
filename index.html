@@ -44,20 +44,15 @@
         return;
       }
 
-      // 使用 Whois API 进行查询
-      var apiUrl = "https://whois.freeaiapi.xyz/?name=" + encodeURIComponent(domain) + "&suffix=com";
+      // 使用 JSONP 进行查询
+      var script = document.createElement('script');
+      script.src = "https://whois.freeaiapi.xyz/?name=" + encodeURIComponent(domain) + "&suffix=com&callback=handleWhoisData";
+      document.body.appendChild(script);
+    }
 
-      // 发送HTTP请求
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          // 处理后端返回的数据
-          displayResult(data);
-        })
-        .catch(error => {
-          console.error("查询失败：", error);
-          alert("查询失败，请稍后重试。");
-        });
+    function handleWhoisData(data) {
+      // 处理后端返回的数据
+      displayResult(data);
     }
 
     function displayResult(data) {
