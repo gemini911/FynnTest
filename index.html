@@ -35,31 +35,30 @@
   <div id="result"></div>
 
   <script>
-  function checkDomain() {
+    function checkDomain() {
       var domainInput = document.getElementById("domain");
       var domain = domainInput.value.trim();
 
       if (domain === "") {
-          alert("请输入有效的域名");
-          return;
+        alert("请输入有效的域名");
+        return;
       }
 
-      // 使用您提供的 Whois API 进行查询
+      // 使用 Whois API 进行查询
       var apiUrl = "https://whois.freeaiapi.xyz/?name=" + encodeURIComponent(domain) + "&suffix=com";
 
       // 发送HTTP请求
       fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-              // 处理后端返回的数据
-              displayResult(data);
-          })
-          .catch(error => {
-              console.error("查询失败：", error);
-              alert("查询失败，请稍后重试。");
-          });
-  }
-
+        .then(response => response.json())
+        .then(data => {
+          // 处理后端返回的数据
+          displayResult(data);
+        })
+        .catch(error => {
+          console.error("查询失败：", error);
+          alert("查询失败，请稍后重试。");
+        });
+    }
 
     function displayResult(data) {
       var resultContainer = document.getElementById("result");
