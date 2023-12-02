@@ -44,9 +44,8 @@
         return;
       }
 
-      // 使用Whois API进行查询
-      var apiUrl = "https://whois.freeaiapi.xyz/?name=qiuyumi&suffix=com
-" + encodeURIComponent(domain);
+      // 使用您提供的 Whois API 进行查询
+      var apiUrl = "https://whois.freeaiapi.xyz/?name=" + encodeURIComponent(domain) + "&suffix=com";
 
       // 发送HTTP请求
       fetch(apiUrl)
