@@ -44,14 +44,20 @@
         return;
       }
 
-      // 使用 JSONP 进行跨域请求
-      var script = document.createElement('script');
-      script.src = `https://whois.freeaiapi.xyz/?name=${encodeURIComponent(domain)}&suffix=com&callback=handleWhoisData`;
-      document.body.appendChild(script);
+      // 使用 Fetch API 进行跨域请求
+      fetch(`http://localhost:3000/check-domain?name=${encodeURIComponent(domain)}`)
+        .then(response => response.json())
+        .then(data => {
+          // 处理后端返回的数据
+          displayResult(data);
+        })
+        .catch(error => {
+          console.error("查询失败：", error);
+          alert("查询失败，请稍后重试。");
+        });
     }
 
-    // JSONP 回调函数
-    function handleWhoisData(data) {
+    function displayResult(data) {
       var resultContainer = document.getElementById("result");
 
       if (data.error) {

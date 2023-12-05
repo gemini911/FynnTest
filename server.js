@@ -6,9 +6,6 @@ const port = 3000;
 
 app.use(cors());
 
-// 静态文件服务
-app.use(express.static('public'));
-
 // API路由
 app.get('/check-domain', async (req, res) => {
     const domain = req.query.name;
