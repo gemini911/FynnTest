@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>域名Whois查询</title>
+  <title>域名查询工具</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -25,7 +25,7 @@
 </head>
 <body>
 
-  <h2>域名Whois查询</h2>
+  <h2>域名查询工具</h2>
 
   <label for="domain">请输入域名：</label>
   <input type="text" id="domain" placeholder="例如：example.com">
@@ -44,18 +44,14 @@
         return;
       }
 
-      // 使用 JSONP 进行查询
+      // 使用 JSONP 进行跨域请求
       var script = document.createElement('script');
-      script.src = "https://whois.freeaiapi.xyz/?name=" + encodeURIComponent(domain) + "&suffix=com&callback=handleWhoisData";
+      script.src = `https://whois.freeaiapi.xyz/?name=${encodeURIComponent(domain)}&suffix=com&callback=handleWhoisData`;
       document.body.appendChild(script);
     }
 
+    // JSONP 回调函数
     function handleWhoisData(data) {
-      // 处理后端返回的数据
-      displayResult(data);
-    }
-
-    function displayResult(data) {
       var resultContainer = document.getElementById("result");
 
       if (data.error) {
@@ -64,18 +60,6 @@
         resultContainer.innerHTML = "查询结果：<pre>" + JSON.stringify(data, null, 2) + "</pre>";
       }
     }
-
-
-
-    function jsonpCallback(data) {
-  // 处理返回的数据
-  console.log(data);
-}
-
-var script = document.createElement('script');
-script.src = 'https://whois.freeaiapi.xyz/?name=teng.com&suffix=com&callback=jsonpCallback';
-document.body.appendChild(script);
-
   </script>
 
 </body>
